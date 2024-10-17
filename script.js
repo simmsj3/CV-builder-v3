@@ -51,24 +51,14 @@ const quests = {
             year: 2
         },
         {
-            title: "Attend Astons Career Fest - THIS IS A MUST!!",
+            title: "Attend The Big Careers Fair",
             type: "Networking",
             description: "Attend the careers fair and speak to at least 3 employers about opportunities. Take a selfie in front of their stands for extra points!",
             skillTree: "Networking & Communication",
             reason: "Career fairs provide opportunities to learn about different industries and make connections with potential employers.",
-            url: "https://www.aston.ac.uk/careers-fest",
-            year: 2
-        },
-        {
-            title: "Company research",
-            type: "Networking",
-            description: "It's important to know about the employer you're applying for a job with, both to impress during recruit, and to ensure the employer is the right fit for you.",
-            skillTree: "Networking & Communication",
-            reason: "This is perhaps one of the most important resources we offer. More opportunities are thrown away because of a lack of company research than for any other reason. And yet, it is so easy to do.",
-            url: "https://www.aston.ac.uk/careers-fest",
+            url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers",
             year: 2
         }
-    
     ],
     year4: [
         {
@@ -98,109 +88,6 @@ const quests = {
             url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters",
             year: 4
         }
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-    ],
-    year2: [
-        {
-            title: "Meet with Placement Coordinator",
-            type: "Professional Development",
-            description: "Have a 1-to-1 meeting with the Placement Coordinator to discuss your career goals.",
-            skillTree: "Professional Skills",
-            reason: "This meeting helps you understand the placement process and align your career goals with potential opportunities.",
-            url: "https://www.aston.ac.uk/careers/contact-us",
-            year: 2
-        },
-        {
-            title: "Attend All Placement Workshops",
-            type: "Professional Development",
-            description: "Participate in all scheduled Placement Workshops to prepare for your placement year.",
-            skillTree: "Professional Skills",
-            reason: "These workshops provide essential information and skills for securing and succeeding in your placement.",
-            url: "https://www.aston.ac.uk/careers/placements",
-            year: 2
-        },
-        {
-            title: "Attend Astons Career Fest - THIS IS A MUST!!",
-            type: "Networking",
-            description: "Attend the careers fair and speak to at least 3 employers about opportunities. Take a selfie in front of their stands for extra points!",
-            skillTree: "Networking & Communication",
-            reason: "Career fairs provide opportunities to learn about different industries and make connections with potential employers.",
-            url: "https://www.aston.ac.uk/careers-fest",
-            year: 4
-        },
-        {
-            title: "Company research",
-            type: "Networking",
-            description: "It's important to know about the employer you're applying for a job with, both to impress during recruit, and to ensure the employer is the right fit for you.",
-            skillTree: "Networking & Communication",
-            reason: "This is perhaps one of the most important resources we offer. More opportunities are thrown away because of a lack of company research than for any other reason. And yet, it is so easy to do.",
-            url: "https://www.aston.ac.uk/careers-fest",
-            year: 4
-        }
-       
-    
-    
-    
-    
-    
     ],
     anytime: [
         {
@@ -237,6 +124,7 @@ const skillTrees = [
 ];
 
 let completedQuests = [];
+
 function displayQuests(year) {
     console.log("Displaying quests for year:", year);
     
