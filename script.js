@@ -1,145 +1,145 @@
 const quests = {
-    year1: [
-        {
-            title: "Volunteering",
-            type: "Work Experience",
-            description: "Get involved in a community project, charity or organisation.",
-            skillTree: "Leadership & Teamwork",
-            reason: "Volunteering shows commitment to your community and your field. It can provide hands-on experience in scientific or healthcare settings.",
-            url: "https://www.aston.ac.uk/careers/get-experience/part-time-jobs-and-volunteering"
-        },
-       {
-    title: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
-    type: "Extracurricular Activities",
-    description: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
-    skillTree: "Networking & Communication",
-    reason: "Engaging in academic activities beyond coursework shows genuine interest in your field and a proactive approach to learning.",
-    links: [
-        { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
-        { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
-            ]
-        },
-        {
-            title: "Attend events, workshops, or external talks",
-            type: "Professional Development",
-            description: "Participate in networking events, seminars, or inaugural professorial talks.",
-            skillTree: "Academic Excellence",
-            reason: "These activities help you present yourself more effectively to potential employers and show continuous learning outside the classroom.",
-            url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
-        },
-        {
-            title: "Develop your skills",
-            type: "Skills Development",
-            description: "Focus on developing and polishing skills that employers look for.",
-            skillTree: "Technical Proficiency",
-            reason: "Developing transferable skills makes you more versatile and valuable to potential employers.",
-    links: [
-        { name: "Careers and Placements", url: "https://www.aston.ac.uk/careers/cv/resource-library"},
-        { name: "Skills need improving", url: "https://www.aston.ac.uk/current-students/support-services/disability-support/resources"},
-        { name: "Polishing overall skills", url: "https://www.aston.ac.uk/current-students/learning-development-centre/academic-writing-and-study-support"}
-            ]
-        },
-        {
-            title: "Set up a LinkedIn profile",
-            type: "Professional Development",
-            description: "Create a professional LinkedIn profile to start building your online presence.",
-            skillTree: "Networking & Communication",
-            reason: "A strong professional online presence showcases your seriousness about your career. LinkedIn allows you to connect with professionals, alumni, and potential employers.",
-            url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters"
-        }
+year1: [
+    {
+        title: "Volunteering",
+        type: "Work Experience",
+        description: "Get involved in a community project, charity or organisation.",
+        skillTree: "Leadership & Teamwork",
+        reason: "Volunteering shows commitment to your community and your field. It can provide hands-on experience in scientific or healthcare settings.",
+        url: "https://www.aston.ac.uk/careers/get-experience/part-time-jobs-and-volunteering"
+    },
+    {
+        title: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
+        type: "Extracurricular Activities",
+        description: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
+        skillTree: "Networking & Communication",
+        reason: "Engaging in academic activities beyond coursework shows genuine interest in your field and a proactive approach to learning.",
+        links: [
+            { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
+            { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
+        ]
+    },
+    {
+        title: "Attend events, workshops, or external talks",
+        type: "Professional Development",
+        description: "Participate in networking events, seminars, or inaugural professorial talks.",
+        skillTree: "Academic Excellence",
+        reason: "These activities help you present yourself more effectively to potential employers and show continuous learning outside the classroom.",
+        url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
+    },
+    {
+        title: "Develop your skills",
+        type: "Skills Development",
+        description: "Focus on developing and polishing skills that employers look for.",
+        skillTree: "Technical Proficiency",
+        reason: "Developing transferable skills makes you more versatile and valuable to potential employers.",
+        links: [
+            { name: "Careers and Placements", url: "https://www.aston.ac.uk/careers/cv/resource-library"},
+            { name: "Skills need improving", url: "https://www.aston.ac.uk/current-students/support-services/disability-support/resources"},
+            { name: "Polishing overall skills", url: "https://www.aston.ac.uk/current-students/learning-development-centre/academic-writing-and-study-support"}
+        ]
+    },
+    {
+        title: "Set up a LinkedIn profile",
+        type: "Professional Development",
+        description: "Create a professional LinkedIn profile to start building your online presence.",
+        skillTree: "Networking & Communication",
+        reason: "A strong professional online presence showcases your seriousness about your career. LinkedIn allows you to connect with professionals, alumni, and potential employers.",
+        url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters"
+    }
     ],
-    year2: [
-        {
-            title: "Meet with Placement Coordinator",
-            type: "Professional Development",
-            description: "Have a 1-to-1 meeting with the Placement Coordinator to discuss your career goals.",
-            skillTree: "Professional Skills",
-            reason: "This meeting helps you understand the placement process and align your career goals with potential opportunities.",
-            url: "https://www.aston.ac.uk/careers/contact-us"
-        },
-        {
-            title: "Attend All Placement Workshops",
-            type: "Professional Development",
-            description: "Participate in all scheduled Placement Workshops to prepare for your placement year.",
-            skillTree: "Professional Skills",
-            reason: "These workshops provide essential information and skills for securing and succeeding in your placement.",
-            url: "https://www.aston.ac.uk/careers/placements"
-        },
-        {
-            title: "Attend The Big Careers Fair",
-            type: "Networking",
-            description: "Attend the careers fair and speak to at least 3 employers about opportunities. Take a selfie in front of their stands for extra points!",
-            skillTree: "Networking & Communication",
-            reason: "Career fairs provide opportunities to learn about different industries and make connections with potential employers.",
-            url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
-        },
-        {
-            title: "Explore Internship Opportunities",
-            type: "Work Experience",
-            description: "Research and apply for insight experiences and short-term internships.",
-            skillTree: "Professional Skills",
-            reason: "Internships provide valuable work experience and can lead to future employment opportunities.",
-            url: "https://www.aston.ac.uk/careers/get-experience/internships"
-        },
-        {
-            title: "Develop your CV",
-            type: "Professional Development",
-            description: "Attend CV writing workshops and use the university's resources to improve your CV.",
-            skillTree: "Professional Skills",
-            reason: "A well-crafted CV is essential for securing placements and future employment.",
-            url: "https://www.aston.ac.uk/careers/cv/resource-library"
-        }
-    ],
-    year4: [
-        {
-            title: "Apply for Graduate Programmes",
-            type: "Professional Development",
-            description: "Research and apply for at least 3 graduate programmes (e.g., STP).",
-            skillTree: "Professional Skills",
-            reason: "Applying for graduate programmes helps you transition from university to professional life.",
-            url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
-        },
-        {
-            title: "Meet with Careers Consultant",
-            type: "Professional Development",
-            description: "Schedule and attend a meeting with a Careers Consultant to discuss post-graduation plans.",
-            skillTree: "Professional Skills",
-            reason: "Career consultants can provide valuable guidance on your career path and job search strategies.",
-            url: "https://www.aston.ac.uk/careers/contact-us"
-        },
-        {
-            title: "Connect with Alumni",
-            type: "Networking",
-            description: "Connect with Alumni on LinkedIn and people who work at companies you're interested in.",
-            skillTree: "Networking & Communication",
-            reason: "Alumni connections can provide insights into different career paths and potential job opportunities.",
-            url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters"
-        },
-        {
-            title: "Mentor a Year 1 or 2 Student",
-            type: "Leadership and Communication",
-            description: "Offer to mentor a younger student to develop leadership skills.",
-            skillTree: "Leadership & Teamwork",
-            reason: "Mentoring demonstrates leadership skills and helps consolidate your own knowledge.",
-            url: "https://www.aston.ac.uk/careers/placements"
-        },
-        {
-            title: "Record Placement Experience",
-            type: "Personal Projects",
-            description: "Create a short video or write-up about your placement experience and tips for future students.",
-            skillTree: "Networking & Communication",
-            reason: "Reflecting on your placement experience helps you articulate your skills and experiences to future employers.",
-            url: "https://www.aston.ac.uk/careers/get-experience/internships"
-        },
-        {
-            title: "Keep a Job Application Record",
-            type: "Professional Development",
-            description: "Maintain a record of your job applications, including company names, positions, and application status.",
-            skillTree: "Professional Skills",
-            reason: "Keeping track of your applications helps you manage your job search effectively and follow up appropriately.",
-            url: "https://www.aston.ac.uk/careers/cv/resource-library"
-        }
-    ]
+year2: [
+    {
+        title: "Meet with Placement Coordinator",
+        type: "Professional Development",
+        description: "Have a 1-to-1 meeting with the Placement Coordinator to discuss your career goals.",
+        skillTree: "Professional Skills",
+        reason: "This meeting helps you understand the placement process and align your career goals with potential opportunities.",
+        url: "https://www.aston.ac.uk/careers/contact-us"
+    },
+    {
+        title: "Attend All Placement Workshops",
+        type: "Professional Development",
+        description: "Participate in all scheduled Placement Workshops to prepare for your placement year.",
+        skillTree: "Professional Skills",
+        reason: "These workshops provide essential information and skills for securing and succeeding in your placement.",
+        url: "https://www.aston.ac.uk/careers/placements"
+    },
+    {
+        title: "Attend The Big Careers Fair",
+        type: "Networking",
+        description: "Attend the careers fair and speak to at least 3 employers about opportunities. Take a selfie in front of their stands for extra points!",
+        skillTree: "Networking & Communication",
+        reason: "Career fairs provide opportunities to learn about different industries and make connections with potential employers.",
+        url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
+    },
+    {
+        title: "Explore Internship Opportunities",
+        type: "Work Experience",
+        description: "Research and apply for insight experiences and short-term internships.",
+        skillTree: "Professional Skills",
+        reason: "Internships provide valuable work experience and can lead to future employment opportunities.",
+        url: "https://www.aston.ac.uk/careers/get-experience/internships"
+    },
+    {
+        title: "Develop your CV",
+        type: "Professional Development",
+        description: "Attend CV writing workshops and use the university's resources to improve your CV.",
+        skillTree: "Professional Skills",
+        reason: "A well-crafted CV is essential for securing placements and future employment.",
+        url: "https://www.aston.ac.uk/careers/cv/resource-library"
+    }
+],
+year4: [
+    {
+        title: "Apply for Graduate Programmes",
+        type: "Professional Development",
+        description: "Research and apply for at least 3 graduate programmes (e.g., STP).",
+        skillTree: "Professional Skills",
+        reason: "Applying for graduate programmes helps you transition from university to professional life.",
+        url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
+    },
+    {
+        title: "Meet with Careers Consultant",
+        type: "Professional Development",
+        description: "Schedule and attend a meeting with a Careers Consultant to discuss post-graduation plans.",
+        skillTree: "Professional Skills",
+        reason: "Career consultants can provide valuable guidance on your career path and job search strategies.",
+        url: "https://www.aston.ac.uk/careers/contact-us"
+    },
+    {
+        title: "Connect with Alumni",
+        type: "Networking",
+        description: "Connect with Alumni on LinkedIn and people who work at companies you're interested in.",
+        skillTree: "Networking & Communication",
+        reason: "Alumni connections can provide insights into different career paths and potential job opportunities.",
+        url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters"
+    },
+    {
+        title: "Mentor a Year 1 or 2 Student",
+        type: "Leadership and Communication",
+        description: "Offer to mentor a younger student to develop leadership skills.",
+        skillTree: "Leadership & Teamwork",
+        reason: "Mentoring demonstrates leadership skills and helps consolidate your own knowledge.",
+        url: "https://www.aston.ac.uk/careers/placements"
+    },
+    {
+        title: "Record Placement Experience",
+        type: "Personal Projects",
+        description: "Create a short video or write-up about your placement experience and tips for future students.",
+        skillTree: "Networking & Communication",
+        reason: "Reflecting on your placement experience helps you articulate your skills and experiences to future employers.",
+        url: "https://www.aston.ac.uk/careers/get-experience/internships"
+    },
+    {
+        title: "Keep a Job Application Record",
+        type: "Professional Development",
+        description: "Maintain a record of your job applications, including company names, positions, and application status.",
+        skillTree: "Professional Skills",
+        reason: "Keeping track of your applications helps you manage your job search effectively and follow up appropriately.",
+        url: "https://www.aston.ac.uk/careers/cv/resource-library"
+    }
+]
 };
 
 const skillTrees = [
