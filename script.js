@@ -1,4 +1,3 @@
-// Quest data (replace with your original data)
 const quests = {
     year1: [
         {
@@ -145,24 +144,56 @@ const skillTrees = [
 let completedQuests = [];
 
 function displayQuests(year) {
+    console.log("Displaying quests for year:", year);
+    
     const questsSection = document.getElementById('quests');
     questsSection.innerHTML = '';
     
     const yearQuests = quests[year];
     if (yearQuests && yearQuests.length > 0) {
-        yearQuests.forEach(quest => {
-            const questElement = document.createElement('div');
-            questElement.classList.add('quest');
-            questElement.innerHTML = `
-                <h3>${quest.title}</h3>
-                <p>${quest.description}</p>
-                <button class="complete-btn" data-year="${year}" data-title="${quest.title}">Complete</button>
-            `;
-            questsSection.appendChild(questElement);
-        });
+        const yearHeader = document.createElement('h2');
+        yearHeader.textContent = `Year ${year.slice(-1)} Quests`;
+        questsSection.appendChild(yearHeader);
+        
+        yearQuests.forEach(quest => displayQuest(quest, questsSection));
     }
     
+    // Display anytime quests
+    const anytimeHeader = document.createElement('h2');
+    anytimeHeader.textContent = 'Quests You Can Do Anytime';
+    questsSection.appendChild(anytimeHeader);
+    
+    quests.anytime.forEach(quest => displayQuest(quest, questsSection));
+    
     addQuestListeners();
+}
+
+function isQuestCompleted(quest) {
+    return completedQuests.some(q => q.title === quest.title);
+}
+
+function displayQuest(quest, container) {
+    const questElement = document.createElement('div');
+    questElement.classList.add('quest');
+    
+    let linksHTML = '';
+    if (quest.links && quest.links.length > 0) {
+        linksHTML = '<p><strong>Useful Links:</strong></p><ul>' +
+            quest.links.map(link => `<li><a href="${link.url}" target="_blank">${link.name}</a></li>`).join('') +
+            '</ul>';
+    } else if (quest.url) {
+        linksHTML = `<p><a href="${quest.url}" target="_blank">Learn more</a></p>`;
+    }
+
+    questElement.innerHTML = `
+        <h3>${quest.title}</h3>
+        <p class="quest-type">${quest.type}</p>
+        <p>${quest.description}</p>
+        <p><strong>Why it's important:</strong> ${quest.reason}</p>
+        ${linksHTML}
+        <button class="complete-btn" data-year="${quest.year}" data-index="${quest.title}">Complete Quest</button>
+    `;
+    container.appendChild(questElement);
 }
 
 function addQuestListeners() {
@@ -170,25 +201,125 @@ function addQuestListeners() {
     completeButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const year = e.target.getAttribute('data-year');
-            const title = e.target.getAttribute('data-title');
-            completeQuest(year, title);
+            const title = e.target.getAttribute('data-index');
+            showCompletionForm(year, title);
         });
     });
 }
 
-function completeQuest(year, title) {
-    const quest = quests[year].find(q => q.title === title);
-    if (quest && !completedQuests.some(q => q.title === title)) {
-        completedQuests.push(quest);
+function showCompletionForm(year, title) {
+    const quest = year === "anytime" 
+        ? quests.anytime.find(q => q.title === title)
+        : quests[`year${year}`].find(q => q.title === title);
+
+    const formHTML = `
+        <div id="completion-form" class="modal">
+            <h3>Complete Quest: ${quest.title}</h3>
+            <label for="completion-date">Date Completed:</label>
+            <input type="date" id="completion-date" required>
+            <label for="completion-notes">Notes:</label>
+            <textarea id="completion-notes" rows="3"></textarea>
+            <h4>Translational Skills Demonstrated:</h4>
+            <div id="skills-checkboxes">
+                ${skillTrees.map(skill => `
+                    <div>
+                        <input type="checkbox" id="${skill}" name="skills" value="${skill}">
+                        <label for="${skill}">${skill}</label>
+                    </div>
+                `).join('')}
+            </div>
+            <button id="submit-completion">Submit</button>
+        </div>
+    `;
+    
+    const modalContainer = document.createElement('div');
+    modalContainer.classList.add('modal-container');
+    modalContainer.innerHTML = formHTML;
+    document.body.appendChild(modalContainer);
+
+    document.getElementById('submit-completion').addEventListener('click', () => {
+        const completionDate = document.getElementById('completion-date').value;
+        const completionNotes = document.getElementById('completion-notes').value;
+        const selectedSkills = Array.from(document.querySelectorAll('#skills-checkboxes input:checked')).map(el => el.value);
+        
+        if (!completionDate) {
+            alert('Please enter the completion date.');
+            return;
+        }
+
+        completeQuest(quest, completionDate, completionNotes, selectedSkills);
+        document.body.removeChild(modalContainer);
+    });
+}
+
+function completeQuest(quest, completionDate, completionNotes, selectedSkills) {
+    if (!completedQuests.some(q => q.title === quest.title)) {
+        completedQuests.push({
+            ...quest,
+            completionDate,
+            completionNotes,
+            selectedSkills
+        });
         updateProgress();
+        updateCVItems();
         saveProgress();
     }
 }
 
 function updateProgress() {
-    // Update progress display
-    // This function needs to be implemented based on your specific requirements
+    skillTrees.forEach(skill => {
+        const completedCount = completedQuests.filter(q => q.skillTree === skill).length;
+        const totalCount = Object.values(quests).flat().filter(q => q.skillTree === skill).length;
+        const percentage = (completedCount / totalCount) * 100;
+        const progressBar = document.querySelector(`.skill-tree h3[data-skill="${skill}"] + .progress-bar .progress`);
+        if (progressBar) {
+            progressBar.style.width = `${percentage}%`;
+        }
+    });
 }
+
+function updateCVItems() {
+    const cvItemsList = document.querySelector('#cv-items ul');
+    cvItemsList.innerHTML = '';
+    completedQuests.forEach(quest => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${quest.title}</strong> (${quest.type})<br>
+            Completed on: ${quest.completionDate}<br>
+            Notes: ${quest.completionNotes}<br>
+            Skills demonstrated: ${quest.selectedSkills.join(', ')}
+        `;
+        cvItemsList.appendChild(li);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const yearButtons = document.querySelectorAll('nav button');
+    yearButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const clickedId = e.target.id;
+            yearButtons.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+
+            if (clickedId === 'progress') {
+                document.getElementById('quests').classList.add('hidden');
+                document.getElementById('progress-section').classList.remove('hidden');
+                updateProgress();
+                updateCVItems();
+            } else {
+                document.getElementById('quests').classList.remove('hidden');
+                document.getElementById('progress-section').classList.add('hidden');
+                displayQuests(clickedId);
+            }
+        });
+    });
+
+    // Initialize with Year 1 quests
+    displayQuests('year1');
+    document.getElementById('year1').classList.add('active');
+    loadProgress();
+    createProgressSection();
+});
 
 function saveProgress() {
     localStorage.setItem('completedQuests', JSON.stringify(completedQuests));
@@ -199,25 +330,42 @@ function loadProgress() {
     if (savedQuests) {
         completedQuests = JSON.parse(savedQuests);
         updateProgress();
+        updateCVItems();
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const navButtons = document.querySelectorAll('.nav-button');
-    navButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            const viewId = e.target.id;
-            if (viewId === 'progress') {
-                document.getElementById('quests').classList.add('hidden');
-                document.getElementById('progress-section').classList.remove('hidden');
-            } else {
-                document.getElementById('quests').classList.remove('hidden');
-                document.getElementById('progress-section').classList.add('hidden');
-                displayQuests(viewId);
-            }
-        });
+// Helper function to create and append elements
+function createElement(tag, className, textContent, parent) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (textContent) element.textContent = textContent;
+    if (parent) parent.appendChild(element);
+    return element;
+}
+
+// Function to create the progress section
+function createProgressSection() {
+    const progressSection = document.getElementById('progress-section');
+    if (!progressSection) return;
+
+    progressSection.innerHTML = ''; // Clear existing content
+
+    createElement('h2', '', 'My CV Progress', progressSection);
+
+    const skillTreesDiv = createElement('div', 'skill-trees', '', progressSection);
+
+    skillTrees.forEach(skill => {
+        const skillTreeDiv = createElement('div', 'skill-tree', '', skillTreesDiv);
+        createElement('h3', '', skill, skillTreeDiv).setAttribute('data-skill', skill);
+        const progressBarDiv = createElement('div', 'progress-bar', '', skillTreeDiv);
+        createElement('div', 'progress', '', progressBarDiv);
     });
 
-    loadProgress();
-    displayQuests('year1'); // Start with Year 1 quests
-});
+    const cvItemsDiv = createElement('div', 'cv-items', '', progressSection);
+    createElement('h3', '', 'CV Content Suggestions', cvItemsDiv);
+    createElement('ul', '', '', cvItemsDiv);
+}
+
+// Initial load
+loadProgress();
+displayQuests('year1');
