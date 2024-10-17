@@ -8,14 +8,17 @@ const quests = {
             reason: "Volunteering shows commitment to your community and your field. It can provide hands-on experience in scientific or healthcare settings.",
             url: "https://www.aston.ac.uk/careers/get-experience/part-time-jobs-and-volunteering"
         },
-        {
-            title: "Join BioSoc or other relevant societies",
-            type: "Extracurricular Activities",
-            description: "Become a member of the Biochemistry Society or other relevant societies.",
-            skillTree: "Networking & Communication",
-            reason: "Engaging in academic activities beyond coursework shows genuine interest in your field and a proactive approach to learning.",
-            url: "https://www.astonsu.com/activities/clubsandsocieties/"
-        },
+       {
+    title: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
+    type: "Extracurricular Activities",
+    description: "Become a member of the Biochemistry Society or other relevant societies.",
+    skillTree: "Networking & Communication",
+    reason: "Engaging in academic activities beyond coursework shows genuine interest in your field and a proactive approach to learning.",
+    links: [
+        { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
+        { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
+    ]
+}
         {
             title: "Attend events, workshops, or external talks",
             type: "Professional Development",
@@ -169,12 +172,23 @@ function displayQuests(year) {
         quests[year].forEach((quest, index) => {
             const questElement = document.createElement('div');
             questElement.classList.add('quest');
+            
+            let linksHTML = '';
+            if (quest.links && quest.links.length > 0) {
+                linksHTML = '<p><strong>Useful Links:</strong></p><ul>' +
+                    quest.links.map(link => `<li><a href="${link.url}" target="_blank">${link.name}</a></li>`).join('') +
+                    '</ul>';
+            } else if (quest.url) {
+                // Fallback for quests that still use the old single URL format
+                linksHTML = `<p><a href="${quest.url}" target="_blank">Learn more</a></p>`;
+            }
+
             questElement.innerHTML = `
                 <h3>${quest.title}</h3>
                 <p class="quest-type">${quest.type}</p>
                 <p>${quest.description}</p>
                 <p><strong>Why it's important:</strong> ${quest.reason}</p>
-                <p><a href="${quest.url}" target="_blank">Learn more</a></p>
+                ${linksHTML}
                 <button class="complete-btn" data-year="${year}" data-index="${index}">Complete Quest</button>
             `;
             questsSection.appendChild(questElement);
