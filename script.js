@@ -61,7 +61,23 @@ const skillTrees = [
     "Networking & Communication"
 ];
 
+// ... (Keep the existing quests and skillTrees definitions from Part 1)
+
 let completedQuests = [];
+
+const translationalSkills = [
+    "Communication",
+    "Teamwork",
+    "Problem-solving",
+    "Time management",
+    "Leadership",
+    "Adaptability",
+    "Critical thinking",
+    "Technical proficiency",
+    "Creativity",
+    "Ethical awareness"
+];
+
 function displayQuests(year) {
     const questsSection = document.getElementById('quests');
     questsSection.innerHTML = '';
@@ -85,17 +101,65 @@ function addQuestListeners() {
         button.addEventListener('click', (e) => {
             const year = e.target.getAttribute('data-year');
             const index = e.target.getAttribute('data-index');
-            completeQuest(year, index);
+            showCompletionForm(year, index);
         });
     });
 }
 
-function completeQuest(year, index) {
+function showCompletionForm(year, index) {
+    const quest = quests[year][index];
+    const formHTML = `
+        <div id="completion-form" class="modal">
+            <h3>Complete Quest: ${quest.title}</h3>
+            <label for="completion-date">Date Completed:</label>
+            <input type="date" id="completion-date" required>
+            <label for="completion-notes">Notes:</label>
+            <textarea id="completion-notes" rows="3"></textarea>
+            <h4>Translational Skills Demonstrated:</h4>
+            <div id="skills-checkboxes">
+                ${translationalSkills.map(skill => `
+                    <div>
+                        <input type="checkbox" id="${skill}" name="skills" value="${skill}">
+                        <label for="${skill}">${skill}</label>
+                    </div>
+                `).join('')}
+            </div>
+            <button id="submit-completion">Submit</button>
+        </div>
+    `;
+    
+    const modalContainer = document.createElement('div');
+    modalContainer.classList.add('modal-container');
+    modalContainer.innerHTML = formHTML;
+    document.body.appendChild(modalContainer);
+
+    document.getElementById('submit-completion').addEventListener('click', () => {
+        const completionDate = document.getElementById('completion-date').value;
+        const completionNotes = document.getElementById('completion-notes').value;
+        const selectedSkills = Array.from(document.querySelectorAll('#skills-checkboxes input:checked')).map(el => el.value);
+        
+        if (!completionDate) {
+            alert('Please enter the completion date.');
+            return;
+        }
+
+        completeQuest(year, index, completionDate, completionNotes, selectedSkills);
+        document.body.removeChild(modalContainer);
+    });
+}
+
+function completeQuest(year, index, completionDate, completionNotes, selectedSkills) {
     const quest = quests[year][index];
     if (!completedQuests.some(q => q.title === quest.title)) {
-        completedQuests.push(quest);
+        completedQuests.push({
+            ...quest,
+            completionDate,
+            completionNotes,
+            selectedSkills
+        });
         updateProgress();
         updateCVItems();
+        saveProgress();
     }
 }
 
@@ -104,7 +168,10 @@ function updateProgress() {
         const completedCount = completedQuests.filter(q => q.skillTree === skill).length;
         const totalCount = Object.values(quests).flat().filter(q => q.skillTree === skill).length;
         const percentage = (completedCount / totalCount) * 100;
-        document.querySelector(`.skill-tree:has(h3:contains('${skill}')) .progress`).style.width = `${percentage}%`;
+        const progressBar = document.querySelector(`.skill-tree h3:contains('${skill}') + .progress-bar .progress`);
+        if (progressBar) {
+            progressBar.style.width = `${percentage}%`;
+        }
     });
 }
 
@@ -113,7 +180,12 @@ function updateCVItems() {
     cvItemsList.innerHTML = '';
     completedQuests.forEach(quest => {
         const li = document.createElement('li');
-        li.textContent = `${quest.title} (${quest.type})`;
+        li.innerHTML = `
+            <strong>${quest.title}</strong> (${quest.type})<br>
+            Completed on: ${quest.completionDate}<br>
+            Notes: ${quest.completionNotes}<br>
+            Skills demonstrated: ${quest.selectedSkills.join(', ')}
+        `;
         cvItemsList.appendChild(li);
     });
 }
@@ -134,11 +206,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize with Year 1 quests
     displayQuests('year1');
+    loadProgress();
 });
 
-// Local Storage functions
 function saveProgress() {
     localStorage.setItem('completedQuests', JSON.stringify(completedQuests));
 }
@@ -149,19 +220,5 @@ function loadProgress() {
         completedQuests = JSON.parse(savedQuests);
         updateProgress();
         updateCVItems();
-    }
-}
-
-// Call loadProgress when the page loads
-document.addEventListener('DOMContentLoaded', loadProgress);
-
-// Save progress whenever a quest is completed
-function completeQuest(year, index) {
-    const quest = quests[year][index];
-    if (!completedQuests.some(q => q.title === quest.title)) {
-        completedQuests.push(quest);
-        updateProgress();
-        updateCVItems();
-        saveProgress(); // Save to local storage
     }
 }
