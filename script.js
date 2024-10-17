@@ -38,7 +38,7 @@ const quests = {
         { name: "Skills need improving", url: "https://www.aston.ac.uk/current-students/support-services/disability-support/resources"},
         { name: "Polishing overall skills", url: "https://www.aston.ac.uk/current-students/learning-development-centre/academic-writing-and-study-support"}
             ]
-        }
+        },
         {
             title: "Set up a LinkedIn profile",
             type: "Professional Development",
