@@ -350,3 +350,68 @@ function loadProgress() {
 // Initial load
 loadProgress();
 displayQuests('year1');
+
+// Helper function to create and append elements
+function createElement(tag, className, textContent, parent) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (textContent) element.textContent = textContent;
+    if (parent) parent.appendChild(element);
+    return element;
+}
+
+// Function to create the progress section
+function createProgressSection() {
+    const progressSection = document.getElementById('progress-section');
+    if (!progressSection) return;
+
+    progressSection.innerHTML = ''; // Clear existing content
+
+    createElement('h2', '', 'My CV Progress', progressSection);
+
+    const skillTreesDiv = createElement('div', 'skill-trees', '', progressSection);
+
+    skillTrees.forEach(skill => {
+        const skillTreeDiv = createElement('div', 'skill-tree', '', skillTreesDiv);
+        createElement('h3', '', skill, skillTreeDiv).setAttribute('data-skill', skill);
+        const progressBarDiv = createElement('div', 'progress-bar', '', skillTreeDiv);
+        createElement('div', 'progress', '', progressBarDiv);
+    });
+
+    const cvItemsDiv = createElement('div', 'cv-items', '', progressSection);
+    createElement('h3', '', 'CV Content Suggestions', cvItemsDiv);
+    createElement('ul', '', '', cvItemsDiv);
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', createProgressSection);
+
+// Function to toggle between years and progress view
+function toggleView(viewId) {
+    const views = ['year1', 'year2', 'year4', 'progress-section'];
+    views.forEach(view => {
+        const element = document.getElementById(view);
+        if (element) {
+            if (view === viewId) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    });
+
+    if (viewId !== 'progress-section') {
+        displayQuests(viewId);
+    } else {
+        updateProgress();
+        updateCVItems();
+    }
+}
+
+// Add event listeners to the navigation buttons
+document.querySelectorAll('nav button').forEach(button => {
+    button.addEventListener('click', (e) => toggleView(e.target.id));
+});
+
+// Initialize the view
+toggleView('year1');
