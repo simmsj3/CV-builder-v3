@@ -60,8 +60,7 @@ const skillTrees = [
     "Technical Proficiency",
     "Networking & Communication"
 ];
-
-// ... (Keep the existing quests and skillTrees definitions from Part 1)
+// ... (Keep the existing quests and skillTrees definitions)
 
 let completedQuests = [];
 
@@ -81,18 +80,22 @@ const translationalSkills = [
 function displayQuests(year) {
     const questsSection = document.getElementById('quests');
     questsSection.innerHTML = '';
-    quests[year].forEach((quest, index) => {
-        const questElement = document.createElement('div');
-        questElement.classList.add('quest');
-        questElement.innerHTML = `
-            <h3>${quest.title}</h3>
-            <p class="quest-type">${quest.type}</p>
-            <p>${quest.description}</p>
-            <button class="complete-btn" data-year="${year}" data-index="${index}">Complete Quest</button>
-        `;
-        questsSection.appendChild(questElement);
-    });
-    addQuestListeners();
+    if (quests[year]) {
+        quests[year].forEach((quest, index) => {
+            const questElement = document.createElement('div');
+            questElement.classList.add('quest');
+            questElement.innerHTML = `
+                <h3>${quest.title}</h3>
+                <p class="quest-type">${quest.type}</p>
+                <p>${quest.description}</p>
+                <button class="complete-btn" data-year="${year}" data-index="${index}">Complete Quest</button>
+            `;
+            questsSection.appendChild(questElement);
+        });
+        addQuestListeners();
+    } else {
+        questsSection.innerHTML = '<p>No quests available for this year.</p>';
+    }
 }
 
 function addQuestListeners() {
@@ -168,7 +171,7 @@ function updateProgress() {
         const completedCount = completedQuests.filter(q => q.skillTree === skill).length;
         const totalCount = Object.values(quests).flat().filter(q => q.skillTree === skill).length;
         const percentage = (completedCount / totalCount) * 100;
-        const progressBar = document.querySelector(`.skill-tree h3:contains('${skill}') + .progress-bar .progress`);
+        const progressBar = document.querySelector(`.skill-tree h3[data-skill="${skill}"] + .progress-bar .progress`);
         if (progressBar) {
             progressBar.style.width = `${percentage}%`;
         }
