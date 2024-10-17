@@ -10,38 +10,40 @@ const quests = {
             year: 1
         },
 
+{
+    title: "Part-time Job",
+    type: "Work Experience",
+    description: "Look for part-time job opportunities, either on-campus or off-campus or even explore summer internship possibilities in labs or biotech companies",
+    skillTree: "Leadership & Teamwork",
+    reason: "Work experience, even if not directly related to biochemistry, develops professional skills and demonstrates responsibility and time management.",
+    url: "https://astonfutures.aston.ac.uk/",
+    year: 1
+},
+
         {
-            title: "Part-time Job",
-            type: "Work Experience",
-            description: "Look for part-time job opportunities, either on-campus or off-campus or even explore summer internship possibilities in labs or biotech companies",
-            skillTree: "Leadership & Teamwork",
-            reason: "Work experience, even if not directly related to biochemistry, develops professional skills and demonstrates responsibility and time management.",
-            url: "https://astonfutures.aston.ac.uk/",
-            year: 1
+    title: "Personal Projects",
+    type: "Professional Development",
+    description: "Start a science blog. Develop a small research project or literature review in an area of interest.",
+    skillTree: "Leadership & Teamwork",
+    reason: "Not only can these fit around other areas, personal projects showcase your initiative, creativity, and genuine interest in biochemistry beyond coursework. These projects demonstrate self-motivation and depth of interest in your field. They can be great talking points in interviews and show that you're proactive about your learning and development.",
+    url: "https://astonfutures.aston.ac.uk/",
+    year: 1
         },
 
         {
-            title: "Personal Projects",
-            type: "Professional Development",
-            description: "Start a science blog. Develop a small research project or literature review in an area of interest.",
-            skillTree: "Leadership & Teamwork",
-            reason: "Not only can these fit around other areas, personal projects showcase your initiative, creativity, and genuine interest in biochemistry beyond coursework. These projects demonstrate self-motivation and depth of interest in your field. They can be great talking points in interviews and show that you're proactive about your learning and development.",
-            url: "https://astonfutures.aston.ac.uk/",
-            year: 1
-        },
-      
-        {
-            title: "Join a society or sports club. Aston's BioSoc, Biochemical Society, clubs are all good starts",
-            type: "Extracurricular Activities",
-            description: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
-            skillTree: "Networking & Communication",
-            reason: "Extracurricular activities develop soft skills like teamwork, communication, and time management. Leadership roles provide valuable experience in organizing and managing people and projects.",
-            links: [
-                { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
-                { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
-            ],
-            year: 1
-        },
+    title: "Join a society or sports club",
+    type: "Extracurricular Activities",
+    description: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
+    skillTree: "Networking & Communication",
+    reason: "Extracurricular activities develop soft skills like teamwork, communication, and time management. Leadership roles provide valuable experience in organizing and managing people and projects.",
+    links: [
+        { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
+        { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
+    ],
+    year: 1
+        }
+
+        
         {
             title: "Attend events, workshops, or external talks",
             type: "Professional Development",
