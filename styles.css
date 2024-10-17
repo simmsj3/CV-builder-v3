@@ -16,6 +16,10 @@ body {
     padding: 0;
 }
 
+nav button.active {
+    background-color: #2980b9;
+}
+
 header {
     background-color: var(--primary-color);
     color: white;
