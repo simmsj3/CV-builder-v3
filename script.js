@@ -160,9 +160,12 @@ const translationalSkills = [
 ];
 
 function displayQuests(year) {
+    console.log("Displaying quests for year:", year);
+    console.log("Available quests:", quests[year]);
+    
     const questsSection = document.getElementById('quests');
     questsSection.innerHTML = '';
-    if (quests[year]) {
+    if (quests[year] && quests[year].length > 0) {
         quests[year].forEach((quest, index) => {
             const questElement = document.createElement('div');
             questElement.classList.add('quest');
@@ -178,6 +181,7 @@ function displayQuests(year) {
         });
         addQuestListeners();
     } else {
+        console.log("No quests found for year:", year);
         questsSection.innerHTML = '<p>No quests available for this year.</p>';
     }
 }
