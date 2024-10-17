@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Biochem CV Quest</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>The Biochem CV Quest</h1>
+        <p>Level up your career in Biochemistry!</p>
+    </header>
+
+    <nav>
+        <button id="year1">Year 1</button>
+        <button id="year2">Year 2</button>
+        <button id="year4">Year 4</button>
+        <button id="progress">My Progress</button>
+    </nav>
+
+    <main>
+        <section id="quests">
+            <!-- Quests will be dynamically inserted here -->
+        </section>
+
+        <section id="progress-section" class="hidden">
+            <h2>My CV Progress</h2>
+            <div id="skill-trees">
+                <div class="skill-tree">
+                    <h3>Academic Excellence</h3>
+                    <div class="progress-bar"><div class="progress"></div></div>
+                </div>
+                <div class="skill-tree">
+                    <h3>Professional Skills</h3>
+                    <div class="progress-bar"><div class="progress"></div></div>
+                </div>
+                <div class="skill-tree">
+                    <h3>Leadership & Teamwork</h3>
+                    <div class="progress-bar"><div class="progress"></div></div>
+                </div>
+                <div class="skill-tree">
+                    <h3>Technical Proficiency</h3>
+                    <div class="progress-bar"><div class="progress"></div></div>
+                </div>
+                <div class="skill-tree">
+                    <h3>Networking & Communication</h3>
+                    <div class="progress-bar"><div class="progress"></div></div>
+                </div>
+            </div>
+            <div id="cv-items">
+                <h3>CV Content Suggestions</h3>
+                <ul>
+                    <!-- CV items will be dynamically inserted here -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Developed for Aston University Biochemistry Students</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
