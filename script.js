@@ -9,7 +9,6 @@ const quests = {
             url: "https://www.aston.ac.uk/careers/get-experience/part-time-jobs-and-volunteering",
             year: 1
         },
-
         {
             title: "Part-time Job",
             type: "Work Experience",
@@ -19,7 +18,6 @@ const quests = {
             url: "https://astonfutures.aston.ac.uk/",
             year: 1
         },
-
         {
             title: "Personal Projects",
             type: "Professional Development",
@@ -29,7 +27,6 @@ const quests = {
             url: "https://astonfutures.aston.ac.uk/",
             year: 1
         },
-
         {
             title: "Join a society or sports club",
             type: "Extracurricular Activities",
@@ -41,8 +38,7 @@ const quests = {
                 { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
             ],
             year: 1
-          },
-        
+        },
         {
             title: "Attend events, workshops, or external talks",
             type: "Professional Development",
