@@ -51,14 +51,15 @@ const quests = {
             year: 2
         },
         {
-            title: "Attend The Big Careers Fair",
+            title: "Attend The Astons Career Fest - THIS IS A MUST!!",
             type: "Networking",
             description: "Attend the careers fair and speak to at least 3 employers about opportunities. Take a selfie in front of their stands for extra points!",
             skillTree: "Networking & Communication",
             reason: "Career fairs provide opportunities to learn about different industries and make connections with potential employers.",
-            url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers",
+            url: "https://www.aston.ac.uk/careers-fest",
             year: 2
         }
+    
     ],
     year4: [
         {
