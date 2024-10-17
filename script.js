@@ -150,8 +150,8 @@ function displayQuests(year) {
     questsSection.innerHTML = '';
     
     // Display year-specific quests
-    const yearQuests = quests[year].filter(quest => quest.year === parseInt(year.slice(-1)));
-    if (yearQuests.length > 0) {
+    const yearQuests = quests[year];
+    if (yearQuests && yearQuests.length > 0) {
         const yearHeader = document.createElement('h2');
         yearHeader.textContent = `Year ${year.slice(-1)} Quests`;
         questsSection.appendChild(yearHeader);
@@ -178,16 +178,20 @@ function displayQuests(year) {
         
         const currentYearNum = parseInt(year.slice(-1));
         for (let i = 1; i < currentYearNum; i++) {
-            quests[`year${i}`].forEach(quest => {
-                if (!isQuestCompleted(quest)) {
-                    displayQuest(quest, questsSection);
-                }
-            });
+            const prevYearQuests = quests[`year${i}`];
+            if (prevYearQuests) {
+                prevYearQuests.forEach(quest => {
+                    if (!isQuestCompleted(quest)) {
+                        displayQuest(quest, questsSection);
+                    }
+                });
+            }
         }
     }
     
     addQuestListeners();
 }
+
 
 function isQuestCompleted(quest) {
     return completedQuests.some(q => q.title === quest.title);
@@ -390,7 +394,7 @@ document.addEventListener('DOMContentLoaded', createProgressSection);
 function toggleView(viewId) {
     const views = ['year1', 'year2', 'year4', 'progress-section'];
     views.forEach(view => {
-        const element = document.getElementById(view);
+        const element = document.getElementById(view) || document.getElementById('quests');
         if (element) {
             if (view === viewId) {
                 element.classList.remove('hidden');
