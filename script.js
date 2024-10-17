@@ -28,12 +28,16 @@ const quests = {
             url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers"
         },
         {
-            title: "Develop in-demand skills",
+            title: "Develop your skills",
             type: "Skills Development",
-            description: "Focus on developing skills that are in high demand among employers.",
+            description: "Focus on developing and polishing skills that are in high demand among employers.",
             skillTree: "Technical Proficiency",
             reason: "Developing technical skills beyond those taught in your courses makes you more versatile and valuable to potential employers.",
-            url: "https://www.aston.ac.uk/careers/cv/resource-library"
+            links: [
+        { name: "Careers amnd Placements", url: "https://www.aston.ac.uk/careers/cv/resource-library"},
+        { name: "Skils need improving", url: "https://www.aston.ac.uk/current-students/support-services/disability-support/resources"},
+        { name: "Polishing overall skills", url:"https://www.aston.ac.uk/current-students/learning-development-centre/academic-writing-and-study-support"}'
+                ]
         },
         {
             title: "Set up a LinkedIn profile",
