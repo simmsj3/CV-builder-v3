@@ -149,7 +149,6 @@ function displayQuests(year) {
     const questsSection = document.getElementById('quests');
     questsSection.innerHTML = '';
     
-    // Display year-specific quests
     const yearQuests = quests[year];
     if (yearQuests && yearQuests.length > 0) {
         const yearHeader = document.createElement('h2');
@@ -159,35 +158,12 @@ function displayQuests(year) {
         yearQuests.forEach(quest => displayQuest(quest, questsSection));
     }
     
-    // Display divider
-    const divider = document.createElement('hr');
-    questsSection.appendChild(divider);
-    
     // Display anytime quests
     const anytimeHeader = document.createElement('h2');
     anytimeHeader.textContent = 'Quests You Can Do Anytime';
     questsSection.appendChild(anytimeHeader);
     
     quests.anytime.forEach(quest => displayQuest(quest, questsSection));
-    
-    // Display uncompleted quests from previous years (if applicable)
-    if (year !== 'year1') {
-        const prevYearHeader = document.createElement('h2');
-        prevYearHeader.textContent = 'Uncompleted Quests from Previous Years';
-        questsSection.appendChild(prevYearHeader);
-        
-        const currentYearNum = parseInt(year.slice(-1));
-        for (let i = 1; i < currentYearNum; i++) {
-            const prevYearQuests = quests[`year${i}`];
-            if (prevYearQuests) {
-                prevYearQuests.forEach(quest => {
-                    if (!isQuestCompleted(quest)) {
-                        displayQuest(quest, questsSection);
-                    }
-                });
-            }
-        }
-    }
     
     addQuestListeners();
 }
@@ -322,22 +298,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearButtons = document.querySelectorAll('nav button');
     yearButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            const year = e.target.id;
-            if (year === 'progress') {
+            const clickedId = e.target.id;
+            if (clickedId === 'progress') {
                 document.getElementById('quests').classList.add('hidden');
                 document.getElementById('progress-section').classList.remove('hidden');
             } else {
                 document.getElementById('quests').classList.remove('hidden');
                 document.getElementById('progress-section').classList.add('hidden');
-                displayQuests(year);
+                displayQuests(clickedId);
             }
+            // Highlight the active button
+            yearButtons.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
         });
     });
 
+    // Initialize with Year 1 quests
     displayQuests('year1');
+    document.getElementById('year1').classList.add('active');
     loadProgress();
 });
-
 function saveProgress() {
     localStorage.setItem('completedQuests', JSON.stringify(completedQuests));
 }
