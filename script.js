@@ -51,11 +51,20 @@ const quests = {
             year: 2
         },
         {
-            title: "Attend The Astons Career Fest - THIS IS A MUST!!",
+            title: "Attend Astons Career Fest - THIS IS A MUST!!",
             type: "Networking",
             description: "Attend the careers fair and speak to at least 3 employers about opportunities. Take a selfie in front of their stands for extra points!",
             skillTree: "Networking & Communication",
             reason: "Career fairs provide opportunities to learn about different industries and make connections with potential employers.",
+            url: "https://www.aston.ac.uk/careers-fest",
+            year: 2
+        }
+        {
+            title: "Company research",
+            type: "Networking",
+            description: "It's important to know about the employer you're applying for a job with, both to impress during recruit, and to ensure the employer is the right fit for you.",
+            skillTree: "Networking & Communication",
+            reason: "This is perhaps one of the most important resources we offer. More opportunities are thrown away because of a lack of company research than for any other reason. And yet, it is so easy to do.",
             url: "https://www.aston.ac.uk/careers-fest",
             year: 2
         }
