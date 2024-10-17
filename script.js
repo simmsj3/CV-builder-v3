@@ -11,13 +11,13 @@ const quests = {
        {
     title: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
     type: "Extracurricular Activities",
-    description: "Become a member of the Biochemistry Society or other relevant societies.",
+    description: "Join Aston's BioSoc, Biochemical Society or other relevant societies",
     skillTree: "Networking & Communication",
     reason: "Engaging in academic activities beyond coursework shows genuine interest in your field and a proactive approach to learning.",
     links: [
         { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
         { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
-    ]
+            ]
         },
         {
             title: "Attend events, workshops, or external talks",
