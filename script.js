@@ -1,149 +1,227 @@
-const quests = {
-    year1: [
-        {
-            title: "Volunteering",
-            type: "Work Experience",
-            description: "Get involved in a community project, charity or organisation.",
-            skillTree: "Leadership & Teamwork",
-            reason: "Volunteering shows commitment to your community and your field. It can provide hands-on experience in scientific or healthcare settings.",
-            url: "https://www.aston.ac.uk/careers/get-experience/part-time-jobs-and-volunteering",
-            year: 1
-        },
-        {
-            title: "Part-time Job",
-            type: "Work Experience",
-            description: "Look for part-time job opportunities, either on-campus or off-campus or even explore summer internship possibilities in labs or biotech companies",
-            skillTree: "Leadership & Teamwork",
-            reason: "Work experience, even if not directly related to biochemistry, develops professional skills and demonstrates responsibility and time management.",
-            url: "https://astonfutures.aston.ac.uk/",
-            year: 1
-        },
-        {
-            title: "Personal Projects",
-            type: "Professional Development",
-            description: "Start a science blog. Develop a small research project or literature review in an area of interest.",
-            skillTree: "Leadership & Teamwork",
-            reason: "Not only can these fit around other areas, personal projects showcase your initiative, creativity, and genuine interest in biochemistry beyond coursework. These projects demonstrate self-motivation and depth of interest in your field. They can be great talking points in interviews and show that you're proactive about your learning and development.",
-            url: "https://astonfutures.aston.ac.uk/",
-            year: 1
-        },
-        {
-            title: "Join a society or sports club",
-            type: "Extracurricular Activities",
-            description: "Join Aston's BioSoc, Biochemical Society, or any other club or society that fits your interests.",
-            skillTree: "Leadership & Teamwork",
-            reason: "Being part of a society or sports club helps you develop leadership, teamwork, and interpersonal skills.",
-            url: "https://www.aston.ac.uk/current-students/student-opportunities/clubs-and-societies",
-            year: 1
-        }
-    ],
-    year2: [
-        {
-            title: "Lab Assistant",
-            type: "Work Experience",
-            description: "Explore opportunities to work as a lab assistant.",
-            skillTree: "Scientific Skills",
-            reason: "This provides hands-on experience in a lab setting, relevant to your field.",
-            url: "https://www.labassistantjobs.com/",
-            year: 2
-        },
-        {
-            title: "Summer Internship",
-            type: "Internships",
-            description: "Apply for internships in biotech companies during the summer.",
-            skillTree: "Career Development",
-            reason: "Internships are crucial for building practical experience and networking.",
-            url: "https://www.internships.com/biotech",
-            year: 2
-        }
-    ],
-    year4: [
-        {
-            title: "Apply for Graduate Programmes",
-            type: "Professional Development",
-            description: "Research and apply for at least 3 graduate programmes (e.g., STP).",
-            skillTree: "Professional Skills",
-            reason: "Applying for graduate programmes helps you transition from university to professional life.",
-            url: "https://www.aston.ac.uk/careers/find-a-job/researching-employers",
-            year: 4
-        },
-        {
-            title: "Meet with Careers Consultant",
-            type: "Professional Development",
-            description: "Schedule and attend a meeting with a Careers Consultant to discuss post-graduation plans.",
-            skillTree: "Professional Skills",
-            reason: "Career consultants can provide valuable guidance on your career path and job search strategies.",
-            url: "https://www.aston.ac.uk/careers/contact-us",
-            year: 4
-        },
-        {
-            title: "Connect with Alumni",
-            type: "Networking",
-            description: "Connect with Alumni on LinkedIn and people who work at companies you're interested in.",
-            skillTree: "Networking & Communication",
-            reason: "Alumni connections can provide insights into different career paths and potential job opportunities.",
-            url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters",
-            year: 4
-        }
-    ]
-};
+import { quests, skillTrees } from './quests.js';
 
-// Function to display quests for the selected year
-function displayQuests(viewId) {
-    const yearQuests = quests[viewId];
-    const questContainer = document.getElementById("quest-container");
+let completedQuests = [];
 
-    if (!yearQuests || yearQuests.length === 0) {
-        questContainer.innerHTML = "<p>No quests available for this year.</p>";
+function displayQuests(year) {
+    console.log("Displaying quests for year:", year);
+    
+    const questsSection = document.getElementById('quests');
+    if (!questsSection) {
+        console.error("Quests section not found");
+        return;
+    }
+    
+    questsSection.innerHTML = '';
+    
+    const yearQuests = quests[year];
+    if (yearQuests && yearQuests.length > 0) {
+        const yearHeader = document.createElement('h2');
+        yearHeader.textContent = `Year ${year.slice(-1)} Quests`;
+        questsSection.appendChild(yearHeader);
+        
+        yearQuests.forEach(quest => displayQuest(quest, questsSection));
+    }
+    
+    const anytimeHeader = document.createElement('h2');
+    anytimeHeader.textContent = 'Quests You Can Do Anytime';
+    questsSection.appendChild(anytimeHeader);
+    
+    quests.anytime.forEach(quest => displayQuest(quest, questsSection));
+    
+    addQuestListeners();
+}
+
+function displayQuest(quest, container) {
+    const questElement = document.createElement('div');
+    questElement.classList.add('quest');
+    
+    let linksHTML = '';
+    if (quest.links && quest.links.length > 0) {
+        linksHTML = '<p><strong>Useful Links:</strong></p><ul>' +
+            quest.links.map(link => `<li><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.name}</a></li>`).join('') +
+            '</ul>';
+    } else if (quest.url) {
+        linksHTML = `<p><a href="${quest.url}" target="_blank" rel="noopener noreferrer">Learn more</a></p>`;
+    }
+
+    questElement.innerHTML = `
+        <h3>${quest.title}</h3>
+        <p class="quest-type">${quest.type}</p>
+        <p>${quest.description}</p>
+        <p><strong>Why it's important:</strong> ${quest.reason}</p>
+        ${linksHTML}
+        <button class="complete-btn" data-year="${quest.year}" data-index="${quest.title}">Complete Quest</button>
+    `;
+    container.appendChild(questElement);
+}
+
+function addQuestListeners() {
+    const completeButtons = document.querySelectorAll('.complete-btn');
+    completeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const year = e.target.getAttribute('data-year');
+            const title = e.target.getAttribute('data-index');
+            showCompletionForm(year, title);
+        });
+    });
+}
+
+function showCompletionForm(year, title) {
+    const quest = year === "anytime" 
+        ? quests.anytime.find(q => q.title === title)
+        : quests[`year${year}`].find(q => q.title === title);
+
+    if (!quest) {
+        console.error("Quest not found");
         return;
     }
 
-    questContainer.innerHTML = ""; // Clear previous quests
+    const formHTML = `
+        <div id="completion-form" class="modal">
+            <h3>Complete Quest: ${quest.title}</h3>
+            <label for="completion-date">Date Completed:</label>
+            <input type="date" id="completion-date" required>
+            <label for="completion-notes">Notes:</label>
+            <textarea id="completion-notes" rows="3"></textarea>
+            <h4>Translational Skills Demonstrated:</h4>
+            <div id="skills-checkboxes">
+                ${skillTrees.map(skill => `
+                    <div>
+                        <input type="checkbox" id="${skill}" name="skills" value="${skill}">
+                        <label for="${skill}">${skill}</label>
+                    </div>
+                `).join('')}
+            </div>
+            <button id="submit-completion">Submit</button>
+        </div>
+    `;
+    
+    const modalContainer = document.createElement('div');
+    modalContainer.classList.add('modal-container');
+    modalContainer.innerHTML = formHTML;
+    document.body.appendChild(modalContainer);
 
-    // Display the quests for the selected year
-    yearQuests.forEach((quest) => {
-        const questElement = document.createElement("div");
-        questElement.className = "quest";
-        questElement.innerHTML = `
-            <h3>${quest.title}</h3>
-            <p>Type: ${quest.type}</p>
-            <p>${quest.description}</p>
-            <p>Skills: ${quest.skillTree}</p>
-            <p><strong>Why it's important:</strong> ${quest.reason}</p>
-            <a href="${quest.url}" target="_blank">Learn More</a>
-        `;
-        questContainer.appendChild(questElement);
+    document.getElementById('submit-completion').addEventListener('click', () => {
+        const completionDate = document.getElementById('completion-date').value;
+        const completionNotes = document.getElementById('completion-notes').value;
+        const selectedSkills = Array.from(document.querySelectorAll('#skills-checkboxes input:checked')).map(el => el.value);
+        
+        if (!completionDate) {
+            alert('Please enter the completion date.');
+            return;
+        }
+
+        completeQuest(quest, completionDate, completionNotes, selectedSkills);
+        document.body.removeChild(modalContainer);
     });
 }
 
-// Function to create the progress section
+function completeQuest(quest, completionDate, completionNotes, selectedSkills) {
+    if (!completedQuests.some(q => q.title === quest.title)) {
+        completedQuests.push({
+            ...quest,
+            completionDate,
+            completionNotes,
+            selectedSkills
+        });
+        updateProgress();
+        updateCVItems();
+        saveProgress();
+    }
+}
+
+function updateProgress() {
+    skillTrees.forEach(skill => {
+        const completedCount = completedQuests.filter(q => q.skillTree === skill).length;
+        const totalCount = Object.values(quests).flat().filter(q => q.skillTree === skill).length;
+        const percentage = (completedCount / totalCount) * 100;
+        const progressBar = document.querySelector(`#skill-trees .skill-tree[data-skill="${skill}"] .progress-bar .progress`);
+        if (progressBar) {
+            progressBar.style.width = `${percentage}%`;
+        }
+    });
+}
+
+function updateCVItems() {
+    const cvItemsList = document.querySelector('#cv-items ul');
+    if (!cvItemsList) {
+        console.error("CV items list not found");
+        return;
+    }
+    cvItemsList.innerHTML = '';
+    completedQuests.forEach(quest => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <strong>${quest.title}</strong> (${quest.type})<br>
+            Completed on: ${quest.completionDate}<br>
+            Notes: ${quest.completionNotes}<br>
+            Skills demonstrated: ${quest.selectedSkills.join(', ')}
+        `;
+        cvItemsList.appendChild(li);
+    });
+}
+
+function saveProgress() {
+    try {
+        localStorage.setItem('completedQuests', JSON.stringify(completedQuests));
+    } catch (error) {
+        console.error("Error saving progress:", error);
+    }
+}
+
+function loadProgress() {
+    try {
+        const savedQuests = localStorage.getItem('completedQuests');
+        if (savedQuests) {
+            completedQuests = JSON.parse(savedQuests);
+            updateProgress();
+            updateCVItems();
+        }
+    } catch (error) {
+        console.error("Error loading progress:", error);
+    }
+}
+
 function createProgressSection() {
     const progressSection = document.getElementById('progress-section');
-    if (!progressSection) return;
+    if (!progressSection) {
+        console.error("Progress section not found");
+        return;
+    }
 
-    progressSection.innerHTML = ''; // Clear existing content
+    const skillTreesDiv = document.getElementById('skill-trees');
+    if (!skillTreesDiv) {
+        console.error("Skill trees container not found");
+        return;
+    }
 
-    createElement('h2', '', 'My CV Progress', progressSection);
-
-    const skillTreesDiv = createElement('div', 'skill-trees', '', progressSection);
+    skillTreesDiv.innerHTML = ''; // Clear existing content
 
     skillTrees.forEach(skill => {
-        const skillTreeDiv = createElement('div', 'skill-tree', '', skillTreesDiv);
-        createElement('h3', '', skill, skillTreeDiv).setAttribute('data-skill', skill);
-        const progressBarDiv = createElement('div', 'progress-bar', '', skillTreeDiv);
-        createElement('div', 'progress', '', progressBarDiv);
+        const skillTreeDiv = document.createElement('div');
+        skillTreeDiv.className = 'skill-tree';
+        skillTreeDiv.setAttribute('data-skill', skill);
+        
+        const skillTitle = document.createElement('h3');
+        skillTitle.textContent = skill;
+        
+        const progressBarDiv = document.createElement('div');
+        progressBarDiv.className = 'progress-bar';
+        
+        const progressDiv = document.createElement('div');
+        progressDiv.className = 'progress';
+        
+        progressBarDiv.appendChild(progressDiv);
+        skillTreeDiv.appendChild(skillTitle);
+        skillTreeDiv.appendChild(progressBarDiv);
+        skillTreesDiv.appendChild(skillTreeDiv);
     });
-
-    const cvItemsDiv = createElement('div', 'cv-items', '', progressSection);
-    createElement('h3', '', 'CV Content Suggestions', cvItemsDiv);
-    createElement('ul', '', '', cvItemsDiv);
 }
 
-// Function to toggle between years and progress view
 function toggleView(viewId) {
     const views = ['year1', 'year2', 'year4', 'progress-section'];
     views.forEach(view => {
-        const element = document.getElementById(view) || document.getElementById('quests');
+        const element = document.getElementById(view === 'progress-section' ? view : 'quests');
         if (element) {
             if (view === viewId) {
                 element.classList.remove('hidden');
@@ -159,12 +237,32 @@ function toggleView(viewId) {
         updateProgress();
         updateCVItems();
     }
+
+    // Update active button
+    document.querySelectorAll('.nav-button').forEach(btn => {
+        btn.classList.toggle('active', btn.id === viewId);
+    });
 }
 
-// Add event listeners to the navigation buttons
-document.querySelectorAll('nav button').forEach(button => {
-    button.addEventListener('click', (e) => toggleView(e.target.id));
+document.addEventListener('DOMContentLoaded', () => {
+    createProgressSection();
+    
+    document.querySelectorAll('.nav-button').forEach(button => {
+        button.addEventListener('click', (e) => toggleView(e.target.id));
+    });
+
+    loadProgress();
+    toggleView('year1');
 });
 
-// Initialize the view
-toggleView('year1');
+// Error logging function
+function logError(message, error) {
+    console.error(message, error);
+    // You could implement more advanced error logging here, such as sending to a server
+}
+
+// Global error handler
+window.addEventListener('error', (event) => {
+    logError('Uncaught error:', event.error);
+});
+
