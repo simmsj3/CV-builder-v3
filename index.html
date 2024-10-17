@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biochem CV Quest</title>
+    <title>The Biochem CV Quest</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
+    <header>
         <h1>The Biochem CV Quest</h1>
         <p>Level up your career in Biochemistry!</p>
-    </div>
+    </header>
 
-    <!-- Year selection buttons -->
-    <div class="year-selection">
-        <button id="year1" onclick="toggleView('year1')">Year 1</button>
-        <button id="year2" onclick="toggleView('year2')">Year 2</button>
-        <button id="year4" onclick="toggleView('year4')">Year 4</button>
-    </div>
+    <nav>
+        <button id="year1" class="nav-button" aria-label="Year 1 Quests">Year 1</button>
+        <button id="year2" class="nav-button" aria-label="Year 2 Quests">Year 2</button>
+        <button id="year4" class="nav-button" aria-label="Year 4 Quests">Year 4</button>
+        <button id="progress" class="nav-button" aria-label="View Progress">My Progress</button>
+    </nav>
 
-    <!-- Quest container where quests will be displayed -->
-    <div id="quest-container">
-        <!-- Quests will be dynamically inserted here based on the selected year -->
-    </div>
+    <main>
+        <section id="quests" aria-live="polite"></section>
+        <section id="progress-section" class="hidden" aria-live="polite">
+            <h2>My CV Progress</h2>
+            <div id="skill-trees"></div>
+            <div id="cv-items">
+                <h3>CV Content Suggestions</h3>
+                <ul></ul>
+            </div>
+        </section>
+    </main>
 
-    <!-- Progress Section -->
-    <div id="progress-section" class="hidden">
-        <!-- This section will be toggled when the progress view is selected -->
-    </div>
+    <footer>
+        <p>Developed for Aston University Biochemistry Students</p>
+    </footer>
 
-    <script src="script.js"></script>
+    <script src="quests.js"></script>
+    <script src="script.js" type="module"></script>
 </body>
 </html>
