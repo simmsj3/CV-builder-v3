@@ -15,13 +15,12 @@ const quests = {
             type: "Work Experience",
             description: "Look for part-time job opportunities, either on-campus or off-campus or even explore summer internship possibilities in labs or biotech companies",
             skillTree: "Leadership & Teamwork",
-            reason: "Volunteering shows commitment to your community and your field. It can provide hands-on experience in scientific or healthcare settings.  Work experience, even if not directly related to biochemistry, develops professional skills and demonstrates responsibility and time management. Adds experience to your CV, showing that you can function in a professional environment. Science-related jobs or internships are particularly valuable for demonstrating relevant skills and knowledge.
-",
+            reason: "Volunteering shows commitment to your community and your field. It can provide hands-on experience in scientific or healthcare settings.  Work experience, even if not directly related to biochemistry, develops professional skills and demonstrates responsibility and time management. Adds experience to your CV, showing that you can function in a professional environment. Science-related jobs or internships are particularly valuable for demonstrating relevant skills and knowledge.",
             url: "https://astonfutures.aston.ac.uk/",
             year: 1
         },
 
-{
+        {
             title: "Personal Projects",
             type: "Professional Development",
             description: "Start a science blog. Develop a small research project or literature review in an area of interest.",
@@ -30,9 +29,7 @@ const quests = {
             url: "https://astonfutures.aston.ac.uk/",
             year: 1
         },
-
-
-        
+      
         {
             title: "Join a society or sports club. Aston's BioSoc, Biochemical Society, clubs are all good starts",
             type: "Extracurricular Activities",
