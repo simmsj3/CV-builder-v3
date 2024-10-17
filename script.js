@@ -45,7 +45,7 @@ year1: [
         description: "Create a professional LinkedIn profile to start building your online presence.",
         skillTree: "Networking & Communication",
         reason: "A strong professional online presence showcases your seriousness about your career. LinkedIn allows you to connect with professionals, alumni, and potential employers.",
-        url: "https://www.aston.ac.uk/careers/cv/cvs-and-cover-letters"
+        url: "https://aston.app.box.com/s/l9l3vopmpnhw2z801wdvfbksctwfwmit"
     }
     ],
 year2: [
