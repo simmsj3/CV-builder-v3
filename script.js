@@ -18,7 +18,7 @@ const quests = {
         { name: "Aston Clubs and Societies", url: "https://www.astonsu.com/activities/clubsandsocieties/" },
         { name: "Biochemical Society", url: "https://www.biochemistry.org/" }
     ]
-}
+        },
         {
             title: "Attend events, workshops, or external talks",
             type: "Professional Development",
