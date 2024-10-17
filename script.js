@@ -30,15 +30,15 @@ const quests = {
         {
             title: "Develop your skills",
             type: "Skills Development",
-            description: "Focus on developing and polishing skills that are in high demand among employers.",
+            description: "Focus on developing and polishing skills that employers look for.",
             skillTree: "Technical Proficiency",
-            reason: "Developing technical skills beyond those taught in your courses makes you more versatile and valuable to potential employers.",
-            links: [
-        { name: "Careers amnd Placements", url: "https://www.aston.ac.uk/careers/cv/resource-library"},
-        { name: "Skils need improving", url: "https://www.aston.ac.uk/current-students/support-services/disability-support/resources"},
-        { name: "Polishing overall skills", url:"https://www.aston.ac.uk/current-students/learning-development-centre/academic-writing-and-study-support"}'
-                ]
-        },
+            reason: "Developing transferable skills makes you more versatile and valuable to potential employers.",
+    links: [
+        { name: "Careers and Placements", url: "https://www.aston.ac.uk/careers/cv/resource-library"},
+        { name: "Skills need improving", url: "https://www.aston.ac.uk/current-students/support-services/disability-support/resources"},
+        { name: "Polishing overall skills", url: "https://www.aston.ac.uk/current-students/learning-development-centre/academic-writing-and-study-support"}
+            ]
+        }
         {
             title: "Set up a LinkedIn profile",
             type: "Professional Development",
@@ -177,14 +177,25 @@ function displayQuests(year) {
             const questElement = document.createElement('div');
             questElement.classList.add('quest');
             
-            let linksHTML = '';
-            if (quest.links && quest.links.length > 0) {
-                linksHTML = '<p><strong>Useful Links:</strong></p><ul>' +
-                    quest.links.map(link => `<li><a href="${link.url}" target="_blank">${link.name}</a></li>`).join('') +
-                    '</ul>';
-            } else if (quest.url) {
-                // Fallback for quests that still use the old single URL format
-                linksHTML = `<p><a href="${quest.url}" target="_blank">Learn more</a></p>`;
+            function createLinksHTML(links) {
+                if (Array.isArray(links) && links.length > 0) {
+                    return '<ul>' + links.map(link => 
+                        `<li><a href="${link.url}" target="_blank">${link.name}</a></li>`
+                    ).join('') + '</ul>';
+                } else if (typeof links === 'string') {
+                    return `<a href="${links}" target="_blank">Learn more</a>`;
+                }
+                return '';
+            }
+
+            let skillTreeHTML = '';
+            if (Array.isArray(quest.skillTree)) {
+                skillTreeHTML = '<p><strong>Skills:</strong></p>' + 
+                    quest.skillTree.map(skill => 
+                        `<p>${skill.name}: ${createLinksHTML(skill.links)}</p>`
+                    ).join('');
+            } else {
+                skillTreeHTML = `<p><strong>Skill:</strong> ${quest.skillTree}</p>`;
             }
 
             questElement.innerHTML = `
@@ -192,7 +203,9 @@ function displayQuests(year) {
                 <p class="quest-type">${quest.type}</p>
                 <p>${quest.description}</p>
                 <p><strong>Why it's important:</strong> ${quest.reason}</p>
-                ${linksHTML}
+                ${skillTreeHTML}
+                <p><strong>Useful Links:</strong></p>
+                ${createLinksHTML(quest.links || quest.url)}
                 <button class="complete-btn" data-year="${year}" data-index="${index}">Complete Quest</button>
             `;
             questsSection.appendChild(questElement);
