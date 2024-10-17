@@ -16,10 +16,6 @@ body {
     padding: 0;
 }
 
-nav button.active {
-    background-color: #2980b9;
-}
-
 header {
     background-color: var(--primary-color);
     color: white;
@@ -40,7 +36,7 @@ nav {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-nav button {
+.nav-button {
     background-color: var(--secondary-color);
     border: none;
     color: white;
@@ -51,8 +47,14 @@ nav button {
     transition: background-color 0.3s ease;
 }
 
-nav button:hover {
+.nav-button:hover,
+.nav-button:focus {
     background-color: #27ae60;
+    outline: none;
+}
+
+.nav-button.active {
+    background-color: #2980b9;
 }
 
 main {
@@ -90,8 +92,10 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.complete-btn:hover {
+.complete-btn:hover,
+.complete-btn:focus {
     background-color: #27ae60;
+    outline: none;
 }
 
 .skill-tree {
@@ -163,4 +167,18 @@ footer {
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+    }
+
+    .nav-button {
+        margin: 0.5rem 0;
+    }
+
+    #skills-checkboxes {
+        grid-template-columns: 1fr;
+    }
 }
